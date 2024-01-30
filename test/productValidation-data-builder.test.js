@@ -39,7 +39,17 @@ describe("Test Data Builder", () => {
 
       expect(result).to.be.deep.equal(expected);
     });
-    it("should return an object error when creating a product with invalid price", () => {});
+    it("should return an object error when creating a product with invalid price", () => {
+      const product = ProductDataBuilder.aProduct().withInvalidPrice().build();
+      const result = productValidator(product);
+
+      const expected = {
+        errors: [errorMessages.PRICE(product.price)],
+        result: false,
+      };
+
+      expect(result).to.be.deep.equal(expected);
+    });
     it("should return an object error when creating a product with invalid category", () => {});
   });
 });

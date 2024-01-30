@@ -10,20 +10,28 @@ const errorMessages = {
     `id: invalid length! Current [${id}] should be between 2 and 20 characters.`,
   NAME: (name) =>
     `name: invalid value! Current [${name}] should have only words.`,
+  PRICE: (price) =>
+    `price: invalid value! Current [${price}] should be between 1 and 1000.`,
 };
 
 function productValidator(product) {
   const errors = [];
-  const isIdSmallerThanTwoAndBiggerThanTwenty =
+  const isIdLengthSmallerThanTwoAndBiggerThanTwenty =
     product.id.length < 2 || product.id.length > 20;
   const nonWordCharacterAndDigitRegExp = /(\W|\d)/;
+  const isPriceLowerThanOneAndBiggerThanOneThousand =
+    product.price < 1 || product.price > 1000;
 
-  if (isIdSmallerThanTwoAndBiggerThanTwenty) {
+  if (isIdLengthSmallerThanTwoAndBiggerThanTwenty) {
     errors.push(errorMessages.ID(product.id));
   }
 
   if (nonWordCharacterAndDigitRegExp.test(product.name)) {
     errors.push(errorMessages.NAME(product.name));
+  }
+
+  if (isPriceLowerThanOneAndBiggerThanOneThousand) {
+    errors.push(errorMessages.PRICE(product.price));
   }
   
   return {
