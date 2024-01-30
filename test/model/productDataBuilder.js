@@ -20,6 +20,18 @@ class ProductDataBuilder {
     return this;
   }
 
+  withInvalidName() {
+    this.productData.name = "abc123";
+
+    return this;
+  }
+
+  withInvalidPrice() {
+    this.productData.price = "2000";
+
+    return this;
+  }
+
   build() {
     const product = new Product(this.productData);
     return product;

@@ -28,7 +28,17 @@ describe("Test Data Builder", () => {
 
       expect(result).to.be.deep.equal(expected);
     });
-    it("should return an object error when creating a product with invalid name", () => {});
+    it("should return an object error when creating a product with invalid name", () => {
+      const product = ProductDataBuilder.aProduct().withInvalidName().build();
+      const result = productValidator(product);
+
+      const expected = {
+        errors: [errorMessages.NAME(product.name)],
+        result: false,
+      };
+
+      expect(result).to.be.deep.equal(expected);
+    });
     it("should return an object error when creating a product with invalid price", () => {});
     it("should return an object error when creating a product with invalid category", () => {});
   });
