@@ -14,8 +14,16 @@ class ProductDataBuilder {
     return new ProductDataBuilder();
   }
 
+  withInvalidId() {
+    this.productData.id = "1";
+
+    return this;
+  }
+
   build() {
     const product = new Product(this.productData);
     return product;
   }
 }
+
+module.exports = ProductDataBuilder;

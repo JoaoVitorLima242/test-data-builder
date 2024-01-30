@@ -5,11 +5,27 @@
     CATEGORY: should be an electronic or organic
 */
 
+const errorMessages = {
+  ID: (id) =>
+    `id: invalid length! Current [${id}] should be between 2 and 20 characters.`,
+};
+
 function productValidator(product) {
   const errors = [];
+  const isIdSmallerThanTwoAndBiggerThanTwenty =
+    product.id.length < 2 || product.id.length > 20;
+
+  if (isIdSmallerThanTwoAndBiggerThanTwenty) {
+    errors.push(errorMessages.ID(product.id));
+  }
 
   return {
     result: errors.length === 0,
     errors,
   };
 }
+
+module.exports = {
+  productValidator,
+  errorMessages
+};
