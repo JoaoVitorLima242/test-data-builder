@@ -24,6 +24,26 @@ const invalidIdProduct =
 
 It makes it easier to create tests and a more readable code.
 
+## Object Mother
+Data Builder has a problem when we use in different test cases it could became repetitive. Then, we can avoid it using Object Mother Pattern that we scope all the logic inside the class functions and only return the object that we want.
+
+The goal of the Object Mother pattern is not to provide a factory method for every single test requirement we might have but instead to provide ways to create a few functionally meaningful versions of an object that can be easily adapted within a concrete test.
+
+```
+// I want an object with an invalid id
+
+class ObjectMother {
+    static withInvalid() {
+        return ProductDataBuilder
+        .withInvalidId()
+        .build();
+    }
+}
+
+const invalidIdProduct = ObjectMother.withInvalId();
+```
+
+So, if we want to create a new `invalidIdProduct` it won't necessary run all the `ProductDataBuilder` methods, but only the method into `ObjectMother` class.
 ### References
 Erick Wendel JS Expert Course
 https://wiki.c2.com/?TestDataBuilder
