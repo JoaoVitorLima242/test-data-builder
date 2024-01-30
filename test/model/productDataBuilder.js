@@ -32,6 +32,12 @@ class ProductDataBuilder {
     return this;
   }
 
+  withInvalidCategory() {
+    this.productData.category = "toy";
+
+    return this;
+  }
+
   build() {
     const product = new Product(this.productData);
     return product;

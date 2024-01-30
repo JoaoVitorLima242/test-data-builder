@@ -50,6 +50,16 @@ describe("Test Data Builder", () => {
 
       expect(result).to.be.deep.equal(expected);
     });
-    it("should return an object error when creating a product with invalid category", () => {});
+    it("should return an object error when creating a product with invalid category", () => {
+      const product = ProductDataBuilder.aProduct().withInvalidCategory().build();
+      const result = productValidator(product);
+
+      const expected = {
+        errors: [errorMessages.CATEGORY(product.category)],
+        result: false,
+      };
+
+      expect(result).to.be.deep.equal(expected);
+    });
   });
 });
